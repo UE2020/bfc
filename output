@@ -1,0 +1,3958 @@
+; sub rsp, 0x28
+; mov [rsp + 0x30], rcx
+; mov [rsp + 0x40], r8
+; mov [rsp + 0x48], r9
+; sub rsp, 0x28 ; mov [rsp + 0x30], rcx ; mov [rsp + 0x40], r8 ; mov
+[rsp + 0x48], r9
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; mov BYTE [idx], 0
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; ; call_extern! (ops, State :: putchar)
+; mov [rsp + 0x38], rdx
+; mov rax, QWORD $addr as _
+; call rax
+; mov rcx, [rsp + 0x30]
+; mov rdx, [rsp + 0x38]
+; mov r8,  [rsp + 0x40]
+; mov r9,  [rsp + 0x48]
+; mov [rsp + 0x38], rdx ; mov rax, QWORD State::putchar as _ ; call rax ; mov
+rcx, [rsp + 0x30] ; mov rdx, [rsp + 0x38] ; mov r8, [rsp + 0x40] ; mov r9,
+[rsp + 0x48]
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; ; call_extern! (ops, State :: putchar)
+; mov [rsp + 0x38], rdx
+; mov rax, QWORD $addr as _
+; call rax
+; mov rcx, [rsp + 0x30]
+; mov rdx, [rsp + 0x38]
+; mov r8,  [rsp + 0x40]
+; mov r9,  [rsp + 0x48]
+; mov [rsp + 0x38], rdx ; mov rax, QWORD State::putchar as _ ; call rax ; mov
+rcx, [rsp + 0x30] ; mov rdx, [rsp + 0x38] ; mov r8, [rsp + 0x40] ; mov r9,
+[rsp + 0x48]
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; ; call_extern! (ops, State :: putchar)
+; mov [rsp + 0x38], rdx
+; mov rax, QWORD $addr as _
+; call rax
+; mov rcx, [rsp + 0x30]
+; mov rdx, [rsp + 0x38]
+; mov r8,  [rsp + 0x40]
+; mov r9,  [rsp + 0x48]
+; mov [rsp + 0x38], rdx ; mov rax, QWORD State::putchar as _ ; call rax ; mov
+rcx, [rsp + 0x30] ; mov rdx, [rsp + 0x38] ; mov r8, [rsp + 0x40] ; mov r9,
+[rsp + 0x48]
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; mov BYTE [idx], 0
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add BYTE [idx], i as i8
+; add idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; mov BYTE [idx], 0
+; sub idx, i as i32
+; add BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; add BYTE [idx], i as i8
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; add idx, i as i32
+; sub BYTE [idx], i as i8
+; sub idx, i as i32
+; => begin_loop ; cmp BYTE [idx], 0 ; jz => end_loop
+; sub idx, i as i32
+; jmp => begin_loop ; => end_loop
+; jmp => begin_loop ; => end_loop
+; add idx, i as i32
+; jmp => begin_loop ; => end_loop
+; ; epilogue! (ops, 0)
+; move, retval, 0
+; add rsp, 0x28; ret
+; mov retval, 0 ; add rsp, 0x28 ; ret
+; .alias idx, rdx
+; .alias retval, rax
+AAAAAAAAAAAAAAAABBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDEGFFEEEEDDDDDDCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+AAAAAAAAAAAAAAABBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDEEEFGIIGFFEEEDDDDDDDDCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBB
+AAAAAAAAAAAAABBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDEEEEFFFI KHGGGHGEDDDDDDDDDCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBB
+AAAAAAAAAAAABBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDEEEEEFFGHIMTKLZOGFEEDDDDDDDDDCCCCCCCCCBBBBBBBBBBBBBBBBBBBBB
+AAAAAAAAAAABBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDEEEEEEFGGHHIKPPKIHGFFEEEDDDDDDDDDCCCCCCCCCCBBBBBBBBBBBBBBBBBB
+AAAAAAAAAABBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEFFGHIJKS  X KHHGFEEEEEDDDDDDDDDCCCCCCCCCCBBBBBBBBBBBBBBBB
+AAAAAAAAABBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEFFGQPUVOTY   ZQL[MHFEEEEEEEDDDDDDDCCCCCCCCCCCBBBBBBBBBBBBBB
+AAAAAAAABBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEFFFFFGGHJLZ         UKHGFFEEEEEEEEDDDDDCCCCCCCCCCCCBBBBBBBBBBBB
+AAAAAAABBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDEEEEFFFFFFGGGGHIKP           KHHGGFFFFEEEEEEDDDDDCCCCCCCCCCCBBBBBBBBBBB
+AAAAAAABBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDEEEEEFGGHIIHHHHHIIIJKMR        VMKJIHHHGFFFFFFGSGEDDDDCCCCCCCCCCCCBBBBBBBBB
+AAAAAABBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDEEEEEEFFGHK   MKJIJO  N R  X      YUSR PLV LHHHGGHIOJGFEDDDCCCCCCCCCCCCBBBBBBBB
+AAAAABBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDEEEEEEEEEFFFFGH O    TN S                       NKJKR LLQMNHEEDDDCCCCCCCCCCCCBBBBBBB
+AAAAABBCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDEEEEEEEEEEEEFFFFFGHHIN                                 Q     UMWGEEEDDDCCCCCCCCCCCCBBBBBB
+AAAABBCCCCCCCCCCCCCCCCCCCCCCCCCDDDDEEEEEEEEEEEEEEEFFFFFFGHIJKLOT                                     [JGFFEEEDDCCCCCCCCCCCCCBBBBB
+AAAABCCCCCCCCCCCCCCCCCCCCCCDDDDEEEEEEEEEEEEEEEEFFFFFFGGHYV RQU                                     QMJHGGFEEEDDDCCCCCCCCCCCCCBBBB
+AAABCCCCCCCCCCCCCCCCCDDDDDDDEEFJIHFFFFFFFFFFFFFFGGGGGGHIJN                                            JHHGFEEDDDDCCCCCCCCCCCCCBBB
+AAABCCCCCCCCCCCDDDDDDDDDDEEEEFFHLKHHGGGGHHMJHGGGGGGHHHIKRR                                           UQ L HFEDDDDCCCCCCCCCCCCCCBB
+AABCCCCCCCCDDDDDDDDDDDEEEEEEFFFHKQMRKNJIJLVS JJKIIIIIIJLR                                               YNHFEDDDDDCCCCCCCCCCCCCBB
+AABCCCCCDDDDDDDDDDDDEEEEEEEFFGGHIJKOU  O O   PR LLJJJKL                                                OIHFFEDDDDDCCCCCCCCCCCCCCB
+AACCCDDDDDDDDDDDDDEEEEEEEEEFGGGHIJMR              RMLMN                                                 NTFEEDDDDDDCCCCCCCCCCCCCB
+AACCDDDDDDDDDDDDEEEEEEEEEFGGGHHKONSZ                QPR                                                NJGFEEDDDDDDCCCCCCCCCCCCCC
+ABCDDDDDDDDDDDEEEEEFFFFFGIPJIIJKMQ                   VX                                                 HFFEEDDDDDDCCCCCCCCCCCCCC
+ACDDDDDDDDDDEFFFFFFFGGGGHIKZOOPPS                                                                      HGFEEEDDDDDDCCCCCCCCCCCCCC
+ADEEEEFFFGHIGGGGGGHHHHIJJLNY                                                                        TJHGFFEEEDDDDDDDCCCCCCCCCCCCC
+A                                                                                                 PLJHGGFFEEEDDDDDDDCCCCCCCCCCCCC
+ADEEEEFFFGHIGGGGGGHHHHIJJLNY                                                                        TJHGFFEEEDDDDDDDCCCCCCCCCCCCC
+ACDDDDDDDDDDEFFFFFFFGGGGHIKZOOPPS                                                                      HGFEEEDDDDDDCCCCCCCCCCCCCC
+ABCDDDDDDDDDDDEEEEEFFFFFGIPJIIJKMQ                   VX                                                 HFFEEDDDDDDCCCCCCCCCCCCCC
+AACCDDDDDDDDDDDDEEEEEEEEEFGGGHHKONSZ                QPR                                                NJGFEEDDDDDDCCCCCCCCCCCCCC
+AACCCDDDDDDDDDDDDDEEEEEEEEEFGGGHIJMR              RMLMN                                                 NTFEEDDDDDDCCCCCCCCCCCCCB
+AABCCCCCDDDDDDDDDDDDEEEEEEEFFGGHIJKOU  O O   PR LLJJJKL                                                OIHFFEDDDDDCCCCCCCCCCCCCCB
+AABCCCCCCCCDDDDDDDDDDDEEEEEEFFFHKQMRKNJIJLVS JJKIIIIIIJLR                                               YNHFEDDDDDCCCCCCCCCCCCCBB
+AAABCCCCCCCCCCCDDDDDDDDDDEEEEFFHLKHHGGGGHHMJHGGGGGGHHHIKRR                                           UQ L HFEDDDDCCCCCCCCCCCCCCBB
+AAABCCCCCCCCCCCCCCCCCDDDDDDDEEFJIHFFFFFFFFFFFFFFGGGGGGHIJN                                            JHHGFEEDDDDCCCCCCCCCCCCCBBB
+AAAABCCCCCCCCCCCCCCCCCCCCCCDDDDEEEEEEEEEEEEEEEEFFFFFFGGHYV RQU                                     QMJHGGFEEEDDDCCCCCCCCCCCCCBBBB
+AAAABBCCCCCCCCCCCCCCCCCCCCCCCCCDDDDEEEEEEEEEEEEEEEFFFFFFGHIJKLOT                                     [JGFFEEEDDCCCCCCCCCCCCCBBBBB
+AAAAABBCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDEEEEEEEEEEEEFFFFFGHHIN                                 Q     UMWGEEEDDDCCCCCCCCCCCCBBBBBB
+AAAAABBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDEEEEEEEEEFFFFGH O    TN S                       NKJKR LLQMNHEEDDDCCCCCCCCCCCCBBBBBBB
+AAAAAABBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDEEEEEEFFGHK   MKJIJO  N R  X      YUSR PLV LHHHGGHIOJGFEDDDCCCCCCCCCCCCBBBBBBBB
+AAAAAAABBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDEEEEEFGGHIIHHHHHIIIJKMR        VMKJIHHHGFFFFFFGSGEDDDDCCCCCCCCCCCCBBBBBBBBB
+AAAAAAABBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDEEEEFFFFFFGGGGHIKP           KHHGGFFFFEEEEEEDDDDDCCCCCCCCCCCBBBBBBBBBBB
+AAAAAAAABBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEFFFFFGGHJLZ         UKHGFFEEEEEEEEDDDDDCCCCCCCCCCCCBBBBBBBBBBBB
+AAAAAAAAABBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEFFGQPUVOTY   ZQL[MHFEEEEEEEDDDDDDDCCCCCCCCCCCBBBBBBBBBBBBBB
+AAAAAAAAAABBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEFFGHIJKS  X KHHGFEEEEEDDDDDDDDDCCCCCCCCCCBBBBBBBBBBBBBBBB
+AAAAAAAAAAABBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDEEEEEEFGGHHIKPPKIHGFFEEEDDDDDDDDDCCCCCCCCCCBBBBBBBBBBBBBBBBBB
+AAAAAAAAAAAABBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDEEEEEFFGHIMTKLZOGFEEDDDDDDDDDCCCCCCCCCBBBBBBBBBBBBBBBBBBBBB
+AAAAAAAAAAAAABBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDEEEEFFFI KHGGGHGEDDDDDDDDDCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBB
+AAAAAAAAAAAAAAABBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDEEEFGIIGFFEEEDDDDDDDDCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBB
+
